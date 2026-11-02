@@ -14,13 +14,14 @@ with open("/home/priyanshu/Code/python/hello/.venv/logs.csv") as f:
 
     seperated.remove(['timestamp', 'source_ip', 'username', 'result\n'])
 
+
+    count = {}
     for j in seperated :
             set_values.add(j[1])
-
-    count = 0
-    for k in set_values:
-        for l in seperated:
-            if k == l[1]:
+            if j[1] in count:
+                count[j[1]] += 1
+            else:
+                count[j[1]] = 1
 
 
 
@@ -28,11 +29,4 @@ with open("/home/priyanshu/Code/python/hello/.venv/logs.csv") as f:
     print("Total lines:", a)
     print("Total failed attempts:", b)
     print("unique IPs", set_values)
-
-
-    #first well want to associate each ip with a success/failure tag. most likely a dictionary.
-    #key = ip, value = how many failures.
-
-
-    #dictionaries are of the format {"----" : ----}
-
+    print(count)
