@@ -1,4 +1,6 @@
+from datetime import datetime
 with open("/home/priyanshu/Code/python/hello/.venv/logs.csv") as f:
+
     a = -1
     b=0
     seperated=[]
@@ -16,17 +18,32 @@ with open("/home/priyanshu/Code/python/hello/.venv/logs.csv") as f:
 
 
     count = {}
+    timestamps = []
     for j in seperated :
             set_values.add(j[1])
-            if j[1] in count:
-                count[j[1]] += 1
+
+            if j[3] == "failed\n":
+                if j[1] in count:
+                    count[j[1]] += 1
+                else:
+                    count[j[1]] = 1
             else:
-                count[j[1]] = 1
+                pass
 
-
-
+            timestamps.append(datetime.strptime(j[0], "%Y-%m-%d %H:%M:%S"))
 
     print("Total lines:", a)
     print("Total failed attempts:", b)
+    print("Total success attempts:", a-b)
     print("unique IPs", set_values)
     print(count)
+    for i in timestamps:
+        print(i)
+
+
+    #first well want to associate each ip with a success/failure tag. most likely a dictionary.
+    #key = ip, value = how many failures.
+
+
+    #dictionaries are of the format {"----" : ----}
+
